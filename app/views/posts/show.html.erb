@@ -1,0 +1,15 @@
+<h1>
+  <%= @post.title %>
+</h1>
+
+<p>
+  <strong>By:</strong>
+  <%= link_to @post.user.name, user_path(@post.user) %>
+</p>
+
+<p>
+  <%= @post.content %>
+</p>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Feed', posts_path %>

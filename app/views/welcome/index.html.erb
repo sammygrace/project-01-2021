@@ -9,5 +9,6 @@
 <div style="<%= hidden_when_not_signed_in %>">
   <p>Welcome, <%= @user.name if @user.present? %></p>
   <%= link_to "Sign Out", destroy_user_session_path, method: :delete %> |
-  <%= link_to "See Profile", user_path(@user) %>
+  <%= link_to "See Profile", user_path(@user) %> |
+  <%= link_to "Feed", posts_path %>
 </div>
