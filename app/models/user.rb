@@ -6,5 +6,5 @@ class User < ApplicationRecord
 
   has_many :posts
 
-  validates :name, presence: true
+  validates_uniqueness_of :name, presence: true
 end

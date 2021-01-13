@@ -2,13 +2,13 @@
 
 <div style="<%= hidden_when_signed_in %>">
   <p>Welcome!</p>
-  <%= link_to "Sign Up", new_user_registration_path %>
+  <%= link_to "Sign Up", new_user_registration_path %> |
   <%= link_to "Sign In", new_user_session_path %>
 </div>
 
 <div style="<%= hidden_when_not_signed_in %>">
   <p>Welcome, <%= @user.name if @user.present? %></p>
   <%= link_to "Sign Out", destroy_user_session_path, method: :delete %> |
-  <%= link_to "See Profile", user_path(@user) %> |
-  <%= link_to "Feed", posts_path %>
+  <%= link_to "See Profile", user_path(@user) if @user %> |
+  <%= link_to "All Posts", posts_path %>
 </div>
