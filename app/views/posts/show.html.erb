@@ -11,4 +11,4 @@
   <%= @post.content %>
 </p>
 
-<%= link_to 'Edit', edit_user_post_path(@post.user, @post) %> 
+<%= link_to 'Edit', edit_user_post_path(@post.user, @post), style: hidden_if_unauthorized_to_manage(@post) %> 
