@@ -10,4 +10,10 @@ module ApplicationHelper
       "display: none"
     end
   end
+
+  def hidden_if_owner_of(user)
+    if user == current_user
+      "display: none"
+    end
+  end
 end

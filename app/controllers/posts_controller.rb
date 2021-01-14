@@ -5,7 +5,8 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all.order(:created_at).reverse
+    @user = User.find_by(id: params[:user_id])
+    @posts = @user.present? ? @user.posts : Post.all.order(:created_at).reverse
   end
 
   # GET /posts/1

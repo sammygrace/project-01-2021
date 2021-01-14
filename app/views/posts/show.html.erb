@@ -11,4 +11,11 @@
   <%= @post.content %>
 </p>
 
-<%= link_to 'Edit', edit_user_post_path(@post.user, @post), style: hidden_if_unauthorized_to_manage(@post) %> 
+<div style="<%= hidden_if_unauthorized_to_manage(@post) %>">
+  <%= link_to 'edit', edit_user_post_path(@post.user, @post) %> |
+  <%= link_to 'delete post', @post, method: :delete, data: { confirm: 'are you sure?' } %> 
+</div>
+
+<div style="<%= hidden_if_owner_of(@post.user) %>">
+  <%= link_to "More Posts By #{@post.user.name}", user_posts_path(@post.user) %> 
+</div>

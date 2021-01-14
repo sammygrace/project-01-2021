@@ -1,7 +1,7 @@
 <nav>
   <%= link_to "Home", root_path %> 
   <span style="<%= hidden_when_not_signed_in %>">
-    | <%= link_to "Profile", user_path(current_user) if user_signed_in? %>
     | <%= link_to "All Posts", posts_path %>
+    | <%= link_to "Profile", user_path(current_user) if user_signed_in? %>
   </span>
 </nav>

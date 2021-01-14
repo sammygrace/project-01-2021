@@ -9,6 +9,15 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <style>
+    .text-preview {
+      max-width: 350px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  </style>
+
   <body>
     <%= render 'flash_messages' %>
     <%= render 'nav' %>
