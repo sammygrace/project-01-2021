@@ -4,7 +4,7 @@
 
 <p>
   <strong>By:</strong>
-  <%= link_to @post.user.name, user_path(@post.user) %>
+  <%= link_to @user.name, user_path(@user) %>
 </p>
 
 <p>
@@ -12,10 +12,11 @@
 </p>
 
 <div style="<%= hidden_if_unauthorized_to_manage(@post) %>">
-  <%= link_to 'edit', edit_user_post_path(@post.user, @post) %> |
+  <%= link_to 'my posts', user_posts_path(@user, @post) %> |
+  <%= link_to 'edit', edit_user_post_path(@user, @post) %> |
   <%= link_to 'delete post', @post, method: :delete, data: { confirm: 'are you sure?' } %> 
 </div>
 
-<div style="<%= hidden_if_owner_of(@post.user) %>">
-  <%= link_to "More Posts By #{@post.user.name}", user_posts_path(@post.user) %> 
+<div style="<%= hidden_if_owner_of(@user) %>">
+  <%= link_to "More Posts By #{@user.name}", user_posts_path(@user) %> 
 </div>

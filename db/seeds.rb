@@ -18,6 +18,9 @@ Faker::Name.unique.clear
 end
 
 User.all.each do |user|
+  img = URI.open(Faker::Avatar.image)
+  user.photo.attach(io: img, filename: img)
+
   10.times do
     Post.create({
       title: Faker::Lorem.sentence,

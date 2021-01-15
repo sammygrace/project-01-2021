@@ -20,9 +20,14 @@
         </td>
         <td><%= time_ago_in_words(post.created_at) %> ago</td>
         <td><%= link_to post.user.name, user_path(post.user) %></td>
+        <td><%= link_to 'Delete Post', @post, method: :delete, data: { confirm: 'are you sure?' } %> </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
+
+<div style="<%= hidden_if_unauthorized_to_manage(@user) %>">
+  <%= link_to "New Post", new_user_post_path(current_user) %>
+</div>

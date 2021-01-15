@@ -4,6 +4,12 @@
 </div>
 
 <div class="field">
+  <%= form.label :photo %><br />
+  <%= form.file_field :photo %>
+  <% user.photo.attach(params[:photo]) %>
+</div>
+
+<div class="field">
   <%= form.label :description %><br />
   <%= form.text_area :description %>
 </div>

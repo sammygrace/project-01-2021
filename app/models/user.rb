@@ -6,5 +6,8 @@ class User < ApplicationRecord
 
   has_many :posts
 
+  has_one_attached :photo
+
   validates_uniqueness_of :name, presence: true
+  validates :photo, presence: true
 end

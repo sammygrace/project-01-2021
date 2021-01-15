@@ -1,3 +1,5 @@
+<%= image_tag @user.photo, style: "width:100px" if @user.photo.attached? %>
+
 <h1><%= @user.name %></h1>
 <p><%= @user.description %></p>
 

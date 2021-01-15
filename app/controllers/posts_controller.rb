@@ -6,12 +6,13 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @user = User.find_by(id: params[:user_id])
-    @posts = @user.present? ? @user.posts : Post.all.order(:created_at).reverse
+    @posts = @user.present? ? @user.posts.order(:created_at).reverse : Post.all.order(:created_at).reverse
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @user = @post.user
   end
 
   # GET /posts/new
