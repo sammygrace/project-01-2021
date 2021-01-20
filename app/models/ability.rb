@@ -7,6 +7,9 @@ class Ability
     if user.present?
       can :read, Post
       can :read, User
+      can :read, Conversation, user_id: user.id
+      can :read, Conversation, friend_id: user.id
+
       can :manage, Post, user_id: user.id
       can :manage, User, id: user.id
     end
