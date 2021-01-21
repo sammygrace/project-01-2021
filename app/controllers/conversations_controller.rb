@@ -13,6 +13,7 @@ class ConversationsController < ApplicationController
     @friendship = @conversation.friendship
     @author = @conversation.author
     @friend = @conversation.friend
+    @messages = @conversation.messages.order(:created_at)
   end
 
   # GET /conversations/new

@@ -1,8 +1,13 @@
 <%= image_tag @user.photo, style: "width:100px" if @user.photo.attached? %>
 
 <h1><%= @user.name %></h1>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
 <p><%= @user.description %></p>
-<p>friend: <%= @friendship.friend.name if @friendship %></p>
 
 <div style="<%= hidden_if_unauthorized_to_manage(@user) %>">
   <%= link_to 'New Post', new_user_post_path(@user) %> |

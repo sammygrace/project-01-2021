@@ -7,3 +7,15 @@
   <strong>Friend:</strong>
   <%= link_to @friend.name, user_path(@friend) %>
 </p>
+
+<% @messages.each do |message| %>
+  <p>
+    <%= image_tag message.user.photo, width: "35px" %>
+    <%= message.content %>
+    <div style="text-align:right"> 
+      <%= time_ago_in_words(message.created_at) %> ago
+    </div>
+  </p>
+<% end %>
+
+<%= render "messages/form", message: @conversation.messages.new(user: current_user) %>
