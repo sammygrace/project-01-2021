@@ -1,12 +1,9 @@
 <p>
-  <strong>Friendship:</strong>
-  <%= @conversation.friendship_id %>
+  <strong>Author:</strong>
+  <%= link_to @author.name, user_path(@author) %>
 </p>
 
 <p>
-  <strong>Author:</strong>
-  <%= @conversation.author.name %>
+  <strong>Friend:</strong>
+  <%= link_to @friend.name, user_path(@friend) %>
 </p>
-
-<%= link_to 'Edit', edit_conversation_path(@conversation) %> |
-<%= link_to 'Back', conversations_path %>

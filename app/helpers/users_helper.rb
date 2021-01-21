@@ -1,16 +1,4 @@
 module UsersHelper
-  def hidden_if_not_friends(me, you)
-    if !me.friends.include?(you) && !you.friends.include?(me)
-      "display: none"
-    end
-  end
-
-  def hidden_if_already_friends(me, you)
-    if me.friends.include?(you) || you.friends.include?(me)
-      "display: none"
-    end
-  end
-
   def hidden_if_conversation(friendship)
     if friendship.conversation.present?
       "display: none"
@@ -25,5 +13,13 @@ module UsersHelper
 
   def link_to_conversation(friendship)
     friendship_conversation_path(friendship, friendship.conversation) if friendship.conversation
+  end
+
+  def partial_for_friendship(friendship)
+    if friendship.present?
+      "conversation_form"
+    else
+      "make_friends"
+    end
   end
 end

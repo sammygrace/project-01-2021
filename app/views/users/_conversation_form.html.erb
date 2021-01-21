@@ -1,0 +1,13 @@
+<button style="<%= hidden_if_no_conversation(friendship) %>">
+  <%= link_to "Chat with #{user.name}", link_to_conversation(friendship) if friendship%>
+</button>
+
+<div style="<%= hidden_if_conversation(friendship) %>">
+  <%= form_for Conversation.new(friendship: friendship, author: current_user, friend: user) do |f| %>
+    <%= f.hidden_field :friendship_id %>
+    <%= f.hidden_field :user_id %>
+    <%= f.hidden_field :friend_id %>
+    <%= f.submit "Start Conversation with #{user.name}" %>
+  <% end %>
+</div>
+

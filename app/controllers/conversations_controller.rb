@@ -10,6 +10,9 @@ class ConversationsController < ApplicationController
   # GET /conversations/1
   # GET /conversations/1.json
   def show
+    @friendship = @conversation.friendship
+    @author = @conversation.author
+    @friend = @conversation.friend
   end
 
   # GET /conversations/new
@@ -28,7 +31,7 @@ class ConversationsController < ApplicationController
 
     respond_to do |format|
       if @conversation.save
-        format.html { redirect_to @conversation, notice: 'Conversation was successfully created.' }
+        format.html { redirect_to friendship_conversation_path(@conversation.friendship, @conversation), notice: 'Conversation was successfully created.' }
         format.json { render :show, status: :created, location: @conversation }
       else
         format.html { render :new }
@@ -69,6 +72,6 @@ class ConversationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def conversation_params
-      params.require(:conversation).permit(:user_id, :friendship_id)
+      params.require(:conversation).permit(:user_id, :friendship_id, :friend_id)
     end
 end
