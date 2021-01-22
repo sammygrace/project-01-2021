@@ -1,0 +1,6 @@
+<%= form_for Like.new(user: current_user, post: post) do |f| %>
+  <%= f.hidden_field :user_id %>
+  <%= f.hidden_field :post_id %>
+
+  <%= f.submit "Like This Post" %>
+<% end %>

@@ -6,7 +6,7 @@
       <th>Title</th>
       <th>Content</th>
       <th>Posted</th>
-      <th>User</th>
+      <th>Author</th>
     </tr>
   </thead>
 
@@ -19,9 +19,6 @@
         </td>
         <td><%= time_ago_in_words(post.created_at) %> ago</td>
         <td><%= link_to post.user.name, user_path(post.user) %></td>
-        <td style="<%= hidden_if_unauthorized_to_manage(post) %>">
-          <%= link_to 'Delete Post', @post, method: :delete, data: { confirm: 'are you sure?' } %> 
-        </td>
       </tr>
     <% end %>
   </tbody>

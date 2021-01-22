@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :converstations, dependent: :destroy
   has_many :messages 
+  has_many :likes
 
   has_many :friendships_as_user, 
     class_name: "Friendship", foreign_key: :user_id, dependent: :destroy
@@ -20,5 +21,6 @@ class User < ApplicationRecord
   has_one_attached :photo
 
   validates_uniqueness_of :name, presence: true
+
   validates :photo, presence: true
 end

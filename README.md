@@ -2,13 +2,7 @@
 
 ## To Do:
 
-* friendships, friends
-
-* conversations
-
 * likes
-
-* active storage
 
 ================================================
 
