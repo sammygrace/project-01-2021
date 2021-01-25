@@ -15,7 +15,7 @@
 
 <p>
   <strong>Likes:</strong>
-  <%= @post.likes.count %>
+  <%= @likes.count %>
 </p>
 
 <%= render partial_for_liking(@post), post: @post, style: hidden_if_owner_of(@user) %>

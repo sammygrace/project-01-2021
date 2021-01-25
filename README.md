@@ -2,7 +2,7 @@
 
 ## To Do:
 
-* likes
+* friendship confirmation from both friends
 
 ================================================
 

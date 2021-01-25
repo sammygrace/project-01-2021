@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :content %>
-    <%= form.text_field :content %>
+    <%= form.text_field :content, id: "message-content" %>
   </div>
 
   <div style="display:none" class="field">
@@ -26,7 +26,7 @@
     <%= form.number_field :user_id %>
   </div>
 
-  <div class="actions">
+  <div class="actions" id="submit">
     <%= form.submit %>
   </div>
 <% end %>

@@ -13,6 +13,7 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @user = @post.user
+    @likes = @post.likes
   end
 
   # GET /posts/new

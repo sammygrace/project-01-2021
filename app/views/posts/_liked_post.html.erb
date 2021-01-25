@@ -1,3 +1,6 @@
 <p style="color:green">
   You liked this post!
 </p>
+
+<% like = @post.likes.find_by(user: current_user) %>
+<p><%= link_to "Unlike This Post", like, method: :delete %></p>
