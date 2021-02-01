@@ -18,7 +18,7 @@
   <%= @likes.count %>
 </p>
 
-<%= render partial_for_liking(@post), post: @post, style: hidden_if_owner_of(@user) %>
+<%= render partial_for_liking(@post), post: @post %>
 
 <div style="<%= hidden_if_unauthorized_to_manage(@post) %>">
   <%= link_to 'my posts', user_posts_path(@user, @post) %> |

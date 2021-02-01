@@ -12,6 +12,10 @@ class Ability
 
       can :manage, Post, user_id: user.id
       can :manage, User, id: user.id
+
+      can [:create, :destroy], Like
+
+#      cannot :create, Like, post: { user_id: user.id }
     end
     # Define abilities for the passed in user here. For example:
     #
