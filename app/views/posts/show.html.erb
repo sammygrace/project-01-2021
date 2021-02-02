@@ -11,21 +11,23 @@
   <%= @post.content %>
 </p>
 
+<div style="<%= hidden_if_owner_of(@user) %>">
+  <%= link_to "More Posts By #{@user.name}", user_posts_path(@user) %> 
+</div>
+
 <br>
 
 <p>
-  <strong>Likes:</strong>
+  <i class="fa fa-heart"></i>
   <%= @likes.count %>
 </p>
 
-<%= render partial_for_liking(@post), post: @post %>
+<% if can? :create, @post.likes.new %>
+  <%= render partial_for_liking(@post), post: @post %>
+<% end %>
 
 <div style="<%= hidden_if_unauthorized_to_manage(@post) %>">
   <%= link_to 'my posts', user_posts_path(@user, @post) %> |
   <%= link_to 'edit', edit_user_post_path(@user, @post) %> |
   <%= link_to 'delete post', @post, method: :delete, data: { confirm: 'are you sure?' } %> 
-</div>
-
-<div style="<%= hidden_if_owner_of(@user) %>">
-  <%= link_to "More Posts By #{@user.name}", user_posts_path(@user) %> 
 </div>

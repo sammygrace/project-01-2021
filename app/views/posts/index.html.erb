@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>Title</th>
+      <th></th>
       <th>Content</th>
       <th>Posted</th>
       <th>Author</th>
@@ -14,10 +15,19 @@
     <% @posts.each do |post| %>
       <tr>
         <td><%= link_to post.title, user_post_path(post.user, post) %></td>
+
+        <td style="text-align:center">
+          <% if @likes.find_by(post: post).present? %>
+            <i class="fa fa-heart"></i>
+          <% end %>
+        </td>
+
         <td class="text-preview">
           <%= post.content %>
         </td>
+
         <td><%= time_ago_in_words(post.created_at) %> ago</td>
+
         <td><%= link_to post.user.name, user_path(post.user) %></td>
       </tr>
     <% end %>

@@ -7,18 +7,19 @@ class PostsController < ApplicationController
   def index
     @user = User.find_by(id: params[:user_id])
     @posts = @user.present? ? @user.posts.order(:created_at).reverse : Post.all.order(:created_at).reverse
+    @likes = current_user.likes
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @user = @post.user
     @likes = @post.likes
   end
 
   # GET /posts/new
   def new
     @post = current_user.posts.new
+    @user = @post.user
   end
 
   # GET /posts/1/edit
@@ -69,6 +70,7 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
+      @user = @post.user
     end
 
     # Only allow a list of trusted parameters through.

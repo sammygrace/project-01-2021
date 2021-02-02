@@ -5,8 +5,7 @@ class Ability
 
   def initialize(user)
     if user.present?
-      can :read, Post
-      can :read, User
+      can :read, [Post, User]
       can :read, Conversation, user_id: user.id
       can :read, Conversation, friend_id: user.id
 
@@ -15,7 +14,7 @@ class Ability
 
       can [:create, :destroy], Like
 
-#      cannot :create, Like, post: { user_id: user.id }
+      cannot :create, Like, post: { user_id: user.id }
     end
     # Define abilities for the passed in user here. For example:
     #
