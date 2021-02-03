@@ -6,7 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User.destroy_all
+
 Faker::Name.unique.clear
+Faker::Internet.unique.clear
 
 10.times do |user|
   user = User.new
@@ -14,13 +17,14 @@ Faker::Name.unique.clear
   user.password = "password"
   user.name = Faker::Name.unique.first_name
   user.description = Faker::Lorem.paragraph
+
+  img = URI.open(Faker::Avatar.image)
+  user.photo.attach(io: img, filename: img)
+
   user.save
 end
 
 User.all.each do |user|
-  img = URI.open(Faker::Avatar.image)
-  user.photo.attach(io: img, filename: img)
-
   10.times do
     Post.create({
       title: Faker::Lorem.sentence,
