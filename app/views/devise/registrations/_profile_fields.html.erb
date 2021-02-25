@@ -7,6 +7,8 @@
   <%= form.label :photo %><br />
   <%= form.file_field :photo %>
   <% user.photo.attach(params[:photo]) %>
+
+  <%= image_tag user.photo.variant if user.photo.attached? %>
 </div>
 
 <div class="field">
