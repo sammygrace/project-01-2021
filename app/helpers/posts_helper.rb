@@ -6,4 +6,14 @@ module PostsHelper
       "like_post"
     end
   end
+
+  def hidden_if_unliked(post, likes)
+    if !likes.where(post: post).exists?
+      "display: none"
+    end
+  end
+
+  def hidden_for_short_lists(resource)
+    resource.count <= 10 ? "display: none" : "display: initial"
+  end
 end

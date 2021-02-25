@@ -11,15 +11,15 @@
     </tr>
   </thead>
 
+  <%== pagy_info(@pagy) %>
+
   <tbody>
     <% @posts.each do |post| %>
       <tr>
         <td><%= link_to post.title, user_post_path(post.user, post) %></td>
 
         <td style="text-align:center">
-          <% if @likes.find_by(post: post).present? %>
-            <i class="fa fa-heart"></i>
-          <% end %>
+          <i class="fa fa-heart" style="<%= hidden_if_unliked(post, @likes) %>"></i>
           <%= post.likes.count %>
         </td>
 
@@ -38,6 +38,10 @@
     <% end %>
   </tbody>
 </table>
+
+<div style="<%= hidden_for_short_lists(@pagy) %>">
+  <%== pagy_nav(@pagy) %>
+</div>
 
 <br>
 

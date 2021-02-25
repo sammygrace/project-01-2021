@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  include Pagy::Backend
   load_and_authorize_resource
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
@@ -6,8 +7,9 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @user = User.find_by(id: params[:user_id])
-    @posts = @user.present? ? @user.posts.order(:created_at).reverse : Post.all.order(:created_at).reverse
     @likes = current_user.likes
+    @posts = @user.present? ? @user.posts : Post.all
+    @pagy, @posts = pagy(@posts.order(:created_at).reverse_order, items: 10)
   end
 
   # GET /posts/1
