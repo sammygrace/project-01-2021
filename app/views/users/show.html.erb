@@ -12,7 +12,8 @@
 <div style="<%= hidden_if_unauthorized_to_manage(@user) %>">
   <%= link_to 'New Post', new_user_post_path(@user) %> |
   <%= link_to "Edit Profile", edit_user_registration_path(@user) %> |
-  <%= link_to "My Posts", user_posts_path(@user) %> 
+  <%= link_to "My Posts", user_posts_path(@user) %> |
+  <%= link_to "Liked Posts", user_likes_path(@user) %> 
 </div>
 
 

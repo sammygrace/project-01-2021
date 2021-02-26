@@ -12,7 +12,7 @@ class Ability
       can :manage, Post, user_id: user.id
       can :manage, User, id: user.id
 
-      can [:create, :destroy], Like
+      can [:create, :destroy, :read], Like
 
       cannot :create, Like, post: { user_id: user.id }
     end

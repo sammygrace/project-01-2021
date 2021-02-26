@@ -12,8 +12,4 @@ module PostsHelper
       "display: none"
     end
   end
-
-  def hidden_for_short_lists(resource)
-    resource.count <= 10 ? "display: none" : "display: initial"
-  end
 end

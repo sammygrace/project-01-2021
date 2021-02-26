@@ -1,11 +1,15 @@
 class LikesController < ApplicationController
+  include Pagy::Backend
+
   load_and_authorize_resource
   before_action :set_like, only: [:show, :edit, :update, :destroy]
 
   # GET /likes
   # GET /likes.json
   def index
-    @likes = Like.all
+    @user = User.find_by(id: params[:user_id])
+    @likes = @user.likes.order(:created_at).reverse_order
+    @pagy, @likes = pagy(@likes, items: 10)
   end
 
   # GET /likes/1

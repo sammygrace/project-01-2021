@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.destroy_all
+Post.destroy_all
 
 Faker::Name.unique.clear
 Faker::Internet.unique.clear

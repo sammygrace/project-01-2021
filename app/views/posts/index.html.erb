@@ -18,7 +18,7 @@
       <tr>
         <td><%= link_to post.title, user_post_path(post.user, post) %></td>
 
-        <td style="text-align:center">
+        <td>
           <i class="fa fa-heart" style="<%= hidden_if_unliked(post, @likes) %>"></i>
           <%= post.likes.count %>
         </td>
