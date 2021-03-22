@@ -1,48 +1,42 @@
 require 'test_helper'
 
 class LikesControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
     @like = likes(:one)
+    @user = users(:one)
+    sign_in @user
   end
 
-  test "should get index" do
-    get likes_url
-    assert_response :success
+  teardown do
+    Rails.cache.clear
   end
 
-  test "should get new" do
-    get new_like_url
-    assert_response :success
+  test "same user should not create multiple likes for the same post" do
+    assert_equal @like.user, @user
+    like = @user.likes.create(user: @user, post: @like.post)
+    assert_not like.save, "user can create mulitiple likes for the same post"
+  end
+
+  test "should get user likes" do
+    assert_routing "/users/1/likes", controller: "likes", action: "index", user_id: "1"
   end
 
   test "should create like" do
-    assert_difference('Like.count') do
-      post likes_url, params: { like: { choice: @like.choice, user_id: @like.user_id } }
-    end
-
-    assert_redirected_to like_url(Like.last)
-  end
-
-  test "should show like" do
-    get like_url(@like)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_like_url(@like)
-    assert_response :success
-  end
-
-  test "should update like" do
-    patch like_url(@like), params: { like: { choice: @like.choice, user_id: @like.user_id } }
-    assert_redirected_to like_url(@like)
+    new_like = @user.likes.new(user: @user, post: posts(:three))
+    assert_not Like.find_by(user: @user, post: posts(:three)), "like already exists"
+    assert new_like.save, "like did not save :("
   end
 
   test "should destroy like" do
+    assert_not_nil user_like_url(@user, @like)
+    assert_not_nil @like.post, "like does not belong to a post"
+
     assert_difference('Like.count', -1) do
-      delete like_url(@like)
+      delete user_like_url(@user, @like)
     end
 
-    assert_redirected_to likes_url
+    assert_redirected_to post_path(@like.post), "did not redirect to correct url after deleting"
   end
 end

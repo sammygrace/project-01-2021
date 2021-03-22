@@ -2,7 +2,7 @@ class LikesController < ApplicationController
   include Pagy::Backend
 
   load_and_authorize_resource
-  before_action :set_like, only: [:show, :edit, :update, :destroy]
+  before_action :set_like, only: [:show, :destroy]
 
   # GET /likes
   # GET /likes.json
@@ -12,18 +12,7 @@ class LikesController < ApplicationController
     @pagy, @likes = pagy(@likes, items: 10)
   end
 
-  # GET /likes/1
-  # GET /likes/1.json
   def show
-  end
-
-  # GET /likes/new
-  def new
-    @like = Like.new
-  end
-
-  # GET /likes/1/edit
-  def edit
   end
 
   # POST /likes
@@ -42,26 +31,12 @@ class LikesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /likes/1
-  # PATCH/PUT /likes/1.json
-  def update
-    respond_to do |format|
-      if @like.update(like_params)
-        format.html { redirect_to @like, notice: 'Like was successfully updated.' }
-        format.json { render :show, status: :ok, location: @like }
-      else
-        format.html { render :edit }
-        format.json { render json: @like.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # DELETE /likes/1
   # DELETE /likes/1.json
   def destroy
     @like.destroy
     respond_to do |format|
-      format.html { redirect_to @like.post, notice: 'Unliked this post.' }
+      format.html { redirect_to post_path(@like.post), notice: 'Unliked this post.' }
       format.json { head :no_content }
     end
   end

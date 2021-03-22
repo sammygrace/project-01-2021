@@ -20,7 +20,7 @@ class FriendshipsControllerTest < ActionDispatch::IntegrationTest
       post friendships_url, params: { friendship: { friend_id: @friendship.friend_id, user_id: @friendship.user_id } }
     end
 
-    assert_redirected_to friendship_url(Friendship.last)
+    assert_redirected_to user_url(Friendship.last.friend)
   end
 
   test "should show friendship" do
