@@ -1,14 +1,14 @@
 one:
   title: FirstPost
-  user: one
+  user_id: 1
   content: This is my first post.
 
 two:
   title: SecondPost
-  user: two
+  user_id: 2
   content: This is the second post.
 
 three:
   title: PostThree
-  user: two
+  user_id: 2
   content: post number three.

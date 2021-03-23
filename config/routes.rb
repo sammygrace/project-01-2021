@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  resources :friendships
-  resources :posts
   resources :conversations
+  resources :friendships
 
   resources :likes, only: [:new, :show]
   resources :messages, only: [:new]
+  resources :posts, only: [:index, :show, :new]
 
   devise_for :users, controllers: {
     registrations: 'users/registrations'
