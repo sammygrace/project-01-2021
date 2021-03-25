@@ -1,16 +1,17 @@
 Rails.application.routes.draw do
   resources :conversations
+
   resources :friendships
 
   resources :likes, only: [:new, :show]
-  resources :messages, only: [:new]
   resources :posts, only: [:index, :show, :new]
+  resources :messages, only: [:new, :index]
 
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
 
-  resources :users do
+  resources :users, only: [:show] do
     resources :posts
     resources :likes
   end
@@ -18,6 +19,8 @@ Rails.application.routes.draw do
   resources :friendships do
     resources :conversations
   end
+
+  post "/messages" => "messages#create", as: "create_message"
 
   root to: 'welcome#index'
 end

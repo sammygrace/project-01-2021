@@ -9,7 +9,6 @@ one:
   name: UserOne
   description: This is user1
   id: 1
-  photo:
 
 two:
   email: seconduser@123.com
