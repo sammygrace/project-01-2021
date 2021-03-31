@@ -4,7 +4,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @message = messages(:one)
     @conversation = @message.conversation
-    @user = users(:one)
+    @user = users(:user_1)
   end
 
   test "should get index" do

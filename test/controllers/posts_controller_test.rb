@@ -5,7 +5,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @post = posts(:one)
-    @user = users(:one)
+    @user = users(:user_1)
     sign_in(@user)
   end
 
@@ -44,7 +44,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should only edit post if belongs to user" do
-    post = users(:two).posts.first
+    post = users(:user_2).posts.first
     assert_not_nil post
     get edit_user_post_url(post.user, post)
     assert_response :redirect, "can edit posts that do not belong to user"

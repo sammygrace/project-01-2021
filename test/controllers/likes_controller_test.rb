@@ -5,7 +5,7 @@ class LikesControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @like = likes(:one)
-    @user = users(:one)
+    @user = users(:user_1)
     sign_in @user
   end
 
