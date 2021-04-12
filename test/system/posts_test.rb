@@ -1,8 +1,13 @@
 require "application_system_test_case"
 
 class PostsTest < ApplicationSystemTestCase
+  include Devise::Test::IntegrationHelpers
+
   setup do
     @post = posts(:one)
+    @user = users(:user_1)
+
+    sign_in @user
   end
 
   test "visiting the index" do
@@ -11,35 +16,41 @@ class PostsTest < ApplicationSystemTestCase
   end
 
   test "creating a Post" do
-    visit posts_url
+    visit user_posts_url(@user)
     click_on "New Post"
 
-    fill_in "Content", with: @post.content
     fill_in "Title", with: @post.title
-    fill_in "User", with: @post.user_id
+    fill_in "Content", with: @post.content
     click_on "Create Post"
 
     assert_text "Post was successfully created"
-    click_on "Back"
+    click_on "my posts"
   end
 
   test "updating a Post" do
-    visit posts_url
-    click_on "Edit", match: :first
+    post = @user.posts.sample
+    assert_not_nil post
 
-    fill_in "Content", with: @post.content
+    ability = Ability.new(@user)
+    assert ability.can?(:manage, post)
+
+    visit user_post_path(@user, post)
+    click_on "edit"
+    assert_selector "h1", text: "Editing Post"
+
     fill_in "Title", with: @post.title
-    fill_in "User", with: @post.user_id
+    fill_in "Content", with: @post.content
     click_on "Update Post"
 
     assert_text "Post was successfully updated"
-    click_on "Back"
   end
 
   test "destroying a Post" do
-    visit posts_url
+    visit user_post_url(@user, @user.posts.sample)
+    assert_text "delete post"
+
     page.accept_confirm do
-      click_on "Destroy", match: :first
+      click_on "delete post", match: :first
     end
 
     assert_text "Post was successfully destroyed"

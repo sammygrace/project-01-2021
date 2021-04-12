@@ -27,7 +27,7 @@
 <% end %>
 
 <div style="<%= hidden_if_unauthorized_to_manage(@post) %>">
-  <%= link_to 'my posts', user_posts_path(@user, @post) %> |
+  <%= link_to 'my posts', user_posts_path(@user) %> |
   <%= link_to 'edit', edit_user_post_path(@user, @post) %> |
   <%= link_to 'delete post', @post, method: :delete, data: { confirm: 'are you sure?' } %> 
 </div>

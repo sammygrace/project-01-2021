@@ -1,8 +1,18 @@
 require "application_system_test_case"
 
 class MessagesTest < ApplicationSystemTestCase
+  include Devise::Test::IntegrationHelpers
+
   setup do
     @message = messages(:one)
+    @conversation = conversations(:one)
+    @author = @conversation.author
+    @friend = @conversation.friend
+
+    @author.photo.attach(io: File.open('db/files/IMG_7772.JPG'), filename: 'IMG_7772.JPG')
+    @friend.photo.attach(io: File.open('db/files/IMG_7772.JPG'), filename: 'IMG_7772.JPG')
+
+    sign_in @author
   end
 
   test "visiting the index" do
@@ -11,31 +21,21 @@ class MessagesTest < ApplicationSystemTestCase
   end
 
   test "creating a Message" do
-    visit messages_url
-    click_on "New Message"
+    visit friendship_conversation_url(@conversation.friendship, @conversation)
 
-    fill_in "Content", with: @message.content
-    fill_in "Conversation", with: @message.conversation_id
-    fill_in "User", with: @message.user_id
+    assert_text "Author:"
+    assert_text "Friend:"
+    assert_text "Content"
+    assert_field "message-content"
+
+    fill_in "message-content", with: @message.content
     click_on "Create Message"
 
-    assert_text "Message was successfully created"
-    click_on "Back"
+    assert_text "Message sent!"
+    assert_text @message.content
   end
 
-  test "updating a Message" do
-    visit messages_url
-    click_on "Edit", match: :first
-
-    fill_in "Content", with: @message.content
-    fill_in "Conversation", with: @message.conversation_id
-    fill_in "User", with: @message.user_id
-    click_on "Update Message"
-
-    assert_text "Message was successfully updated"
-    click_on "Back"
-  end
-
+=begin can't delete individual messages; can only delete conversation
   test "destroying a Message" do
     visit messages_url
     page.accept_confirm do
@@ -44,4 +44,5 @@ class MessagesTest < ApplicationSystemTestCase
 
     assert_text "Message was successfully destroyed"
   end
+=end
 end

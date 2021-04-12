@@ -1,45 +1,40 @@
 require "application_system_test_case"
 
 class LikesTest < ApplicationSystemTestCase
+  include Devise::Test::IntegrationHelpers
+
   setup do
     @like = likes(:one)
-  end
+    @post = posts(:one)
+    @user = users(:user_3)
 
-  test "visiting the index" do
-    visit likes_url
-    assert_selector "h1", text: "Likes"
+    sign_in @user
   end
 
   test "creating a Like" do
-    visit likes_url
-    click_on "New Like"
+    assert_nil @user.likes.find_by(post: @post), "user already liked this post"
 
-    check "Choice" if @like.choice
-    fill_in "User", with: @like.user_id
-    click_on "Create Like"
+    visit user_post_url(@post.user, @post) 
 
-    assert_text "Like was successfully created"
-    click_on "Back"
-  end
+    click_on "Like This Post"
 
-  test "updating a Like" do
-    visit likes_url
-    click_on "Edit", match: :first
-
-    check "Choice" if @like.choice
-    fill_in "User", with: @like.user_id
-    click_on "Update Like"
-
-    assert_text "Like was successfully updated"
-    click_on "Back"
+    assert_text "You liked this post!"
+    assert_link "Unlike This Post"
   end
 
   test "destroying a Like" do
-    visit likes_url
-    page.accept_confirm do
-      click_on "Destroy", match: :first
-    end
+    assert_nil @user.likes.find_by(post: @post), "user already liked this post"
 
-    assert_text "Like was successfully destroyed"
+    visit user_post_url(@like.post.user, @like.post) 
+    click_on "Like This Post"
+
+    assert_text "You liked this post!"
+    assert_link "Unlike This Post"
+    assert @like.save
+
+    click_link "Unlike This Post" 
+
+    assert_text "Unliked this post."
   end
 end
+

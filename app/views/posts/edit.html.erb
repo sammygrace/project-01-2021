@@ -1,5 +1,7 @@
 <h1>Editing Post</h1>
 
-<%= render 'form', post: @post %>
+<%= form_with(model: @post, local: true, url: user_post_path(@post.user, @post)) do |form| %>
+  <%= render 'form', post: @post, form: form %>
+<% end %>
 
 <%= link_to 'Cancel', user_post_path(@user, @post) %>

@@ -1,8 +1,14 @@
 require "application_system_test_case"
 
 class ConversationsTest < ApplicationSystemTestCase
+  include Devise::Test::IntegrationHelpers
+
   setup do
     @conversation = conversations(:one)
+    @author = users(:user_2)
+    @friend = users(:user_3)
+
+    sign_in @author
   end
 
   test "visiting the index" do
@@ -11,25 +17,15 @@ class ConversationsTest < ApplicationSystemTestCase
   end
 
   test "creating a Conversation" do
-    visit conversations_url
-    click_on "New Conversation"
+    friendship = @author.friendships_as_user.find_by(friend: @friend) || @author.friendships_as_friend.find_by(user: @author)
+    assert_not_nil friendship
+    assert_nil Conversation.find_by(author: friendship.user, friend: friendship.friend, friendship: friendship)
 
-    fill_in "User", with: @conversation.user_id
-    click_on "Create Conversation"
+    visit user_url(@friend)
 
-    assert_text "Conversation was successfully created"
-    click_on "Back"
-  end
+    click_on "Start Conversation with #{@friend.name}"
 
-  test "updating a Conversation" do
-    visit conversations_url
-    click_on "Edit", match: :first
-
-    fill_in "User", with: @conversation.user_id
-    click_on "Update Conversation"
-
-    assert_text "Conversation was successfully updated"
-    click_on "Back"
+    assert_text "Conversation was successfully created."
   end
 
   test "destroying a Conversation" do

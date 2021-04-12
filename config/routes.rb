@@ -3,8 +3,8 @@ Rails.application.routes.draw do
 
   resources :friendships
 
-  resources :likes, only: [:new, :show]
-  resources :posts, only: [:index, :show, :new]
+  resources :likes, only: [:new, :show, :destroy]
+  resources :posts, only: [:index, :show, :new, :destroy]
   resources :messages, only: [:new, :index]
 
   devise_for :users, controllers: {

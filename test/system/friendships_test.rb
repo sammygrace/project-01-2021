@@ -1,8 +1,14 @@
 require "application_system_test_case"
 
 class FriendshipsTest < ApplicationSystemTestCase
+  include Devise::Test::IntegrationHelpers
+
   setup do
     @friendship = friendships(:one)
+    @user = users(:user_1)
+    @friend= users(:user_3)
+
+    sign_in @user
   end
 
   test "visiting the index" do
@@ -11,27 +17,12 @@ class FriendshipsTest < ApplicationSystemTestCase
   end
 
   test "creating a Friendship" do
-    visit friendships_url
-    click_on "New Friendship"
+    assert_nil Friendship.find_by(user: @user, friend: @friend)
+    visit user_url(@friend) 
 
-    fill_in "Friend", with: @friendship.friend_id
-    fill_in "User", with: @friendship.user_id
-    click_on "Create Friendship"
+    click_on "Add friend"
 
-    assert_text "Friendship was successfully created"
-    click_on "Back"
-  end
-
-  test "updating a Friendship" do
-    visit friendships_url
-    click_on "Edit", match: :first
-
-    fill_in "Friend", with: @friendship.friend_id
-    fill_in "User", with: @friendship.user_id
-    click_on "Update Friendship"
-
-    assert_text "Friendship was successfully updated"
-    click_on "Back"
+    assert_text "Yay! Now you are friends."
   end
 
   test "destroying a Friendship" do
