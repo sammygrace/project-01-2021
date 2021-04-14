@@ -34,15 +34,4 @@ class MessagesTest < ApplicationSystemTestCase
     assert_text "Message sent!"
     assert_text @message.content
   end
-
-=begin can't delete individual messages; can only delete conversation
-  test "destroying a Message" do
-    visit messages_url
-    page.accept_confirm do
-      click_on "Destroy", match: :first
-    end
-
-    assert_text "Message was successfully destroyed"
-  end
-=end
 end

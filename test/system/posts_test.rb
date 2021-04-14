@@ -55,4 +55,13 @@ class PostsTest < ApplicationSystemTestCase
 
     assert_text "Post was successfully destroyed"
   end
+
+  test "visiting user posts" do
+    user = User.all.sample
+    visit user_posts_url(user)
+
+    user.posts[0..9].each do |post|
+      assert_link post.title
+    end
+  end
 end

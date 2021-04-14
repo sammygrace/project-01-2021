@@ -4,18 +4,54 @@ class UsersTest < ApplicationSystemTestCase
   include Devise::Test::IntegrationHelpers
 
   setup do
-    @user = users(:user_1)
-    sign_in @user
+    @user1 = users(:user_1)
+    @user2 = users(:user_2)
+
+    sign_in @user1
   end
 
-  test "visiting user show page" do
-    visit user_url(@user)
-    assert_selector "h1", text: @user.name
+  test "visiting profile page" do
+    visit root_url
+    click_on "See Profile"
+
+    assert_selector "h1", text: @user1.name
+    assert_no_selector "h3", text: "Recent Posts"
+    assert_selector "h3", text: "Recent Friends' Posts"
+
+    assert_link "New Post"
+    assert_link "Edit Profile"
+    assert_link "My Posts"
+    assert_link "Liked Posts"
   end
 
-  # test "visiting the index" do
-  #   visit users_url
-  #
-  #   assert_selector "h1", text: "User"
-  # end
+  test "visiting another user's profile" do
+    visit user_url(@user2)
+
+    assert_selector "h1", text: @user2.name
+    assert_selector "h3", text: "Recent Posts"
+    assert_selector "h3", text: "Recent Friends' Posts"
+
+    assert_no_link "New Post"
+    assert_no_link "Edit Profile"
+    assert_no_link "My Posts"
+    assert_no_link "Liked Posts"
+  end
+
+=begin how to upload image ?
+  test "signing up" do
+    sign_out @user1
+    visit new_user_registration_url
+    assert_selector "h2", text: "Sign up" 
+    assert_text "Name"
+
+    fill_in "Name", with: @user2.name
+    click_on "Choose File"
+#    fill_in "Description", with: @user2.description
+#    fill_in "Email", with: @user2.email
+
+    click_on "Sign up"
+
+    assert_text "Signed in successfully."
+  end
+=end
 end

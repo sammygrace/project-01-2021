@@ -36,5 +36,20 @@ class LikesTest < ApplicationSystemTestCase
 
     assert_text "Unliked this post."
   end
+
+  test "visiting user likes" do
+    visit user_url(@user)
+
+    click_on "Liked Posts"
+
+    assert_selector "h1", text: "Liked Posts"
+
+    Like.where(user: @user).each do |like|
+      assert_link like.post.title
+      click_on like.post.title
+      assert_text "You liked this post!"
+      click_on @user.name
+    end
+  end
 end
 
