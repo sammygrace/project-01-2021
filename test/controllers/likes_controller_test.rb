@@ -9,16 +9,6 @@ class LikesControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
   end
 
-  teardown do
-    Rails.cache.clear
-  end
-
-  test "same user should not create multiple likes for the same post" do
-    assert_equal @like.user, @user
-    like = @user.likes.create(user: @user, post: @like.post)
-    assert_not like.save, "user can create mulitiple likes for the same post"
-  end
-
   test "should get user likes" do
     assert_routing "/users/1/likes", controller: "likes", action: "index", user_id: "1"
   end

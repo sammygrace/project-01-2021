@@ -7,9 +7,9 @@ class LikeTest < ActiveSupport::TestCase
   end
 
   test "user should not like post more than once" do
-    assert Like.find_by(user: @like.user, post: @like.post)
-    like = Like.new(user: @like.user, post: @like.post)
-    assert_not like.save
+    assert_equal @like.user, @user
+    like = @user.likes.create(user: @user, post: @like.post)
+    assert_not like.save, "user can create mulitiple likes for the same post"
   end
 
   test "user should not like his own posts" do

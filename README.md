@@ -4,14 +4,10 @@
 
 * friendship confirmation from both friends
 
-## Tests
-* system - users
-
-* helpers
-
-* check controllers
-
-* check models 
+## Questions
+* how do you test helpers?
+* how do you upload files in system test?
+* integration test for friendship + conversation + messages ??
 
 ================================================
 

@@ -28,17 +28,7 @@ class ConversationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should show conversation" do
     get conversation_url(@conversation)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_conversation_url(@conversation)
-    assert_response :success
-  end
-
-  test "should update conversation" do
-    patch conversation_url(@conversation), params: { conversation: { user_id: @conversation.user_id } }
-    assert_redirected_to conversation_url(@conversation)
+    assert_response :success, "conversation not showing"
   end
 
   test "should destroy conversation" do
