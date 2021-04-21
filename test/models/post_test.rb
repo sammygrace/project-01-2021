@@ -9,4 +9,10 @@ class PostTest < ActiveSupport::TestCase
     post = @user.posts.new
     assert_not post.save
   end
+
+  test "should belong to a user" do
+    Post.all.each do |post|
+      assert_not_nil post.user
+    end
+  end
 end

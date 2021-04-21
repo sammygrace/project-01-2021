@@ -14,7 +14,7 @@ Faker::Internet.unique.clear
 
 10.times do |user|
   user = User.new
-  user.email = Faker::Internet.email
+  user.email = Faker::Internet.unique.email
   user.password = "password"
   user.name = Faker::Name.unique.first_name
   user.description = Faker::Lorem.paragraph

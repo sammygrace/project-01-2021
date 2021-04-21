@@ -23,7 +23,7 @@
 </p>
 
 <% if can? :create, @post.likes.new %>
-  <%= render partial_for_liking(@post), post: @post %>
+  <%= render partial_for_liking(@post, current_user), post: @post, user: current_user %>
 <% end %>
 
 <div style="<%= hidden_if_unauthorized_to_manage(@post) %>">

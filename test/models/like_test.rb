@@ -19,4 +19,11 @@ class LikeTest < ActiveSupport::TestCase
       assert_not ability.can?(:create, post.likes.new(user_id: @user.id))
     end
   end
+
+  test "every like should belong to a user and a post" do
+    Like.all.each do |like|
+      assert_not_nil like.user
+      assert_not_nil like.post
+    end
+  end
 end

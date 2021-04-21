@@ -1,6 +1,6 @@
 module PostsHelper
-  def partial_for_liking(post)
-    if current_user.likes.where(post_id: post.id).exists?
+  def partial_for_liking(post, user)
+    if user.likes.where(post_id: post.id).exists?
       "liked_post"
     else
       "like_post"

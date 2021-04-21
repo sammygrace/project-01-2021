@@ -37,21 +37,31 @@ class UsersTest < ApplicationSystemTestCase
     assert_no_link "Liked Posts"
   end
 
-=begin how to upload image ?
   test "signing up" do
     sign_out @user1
     visit new_user_registration_url
     assert_selector "h2", text: "Sign up" 
-    assert_text "Name"
 
-    fill_in "Name", with: @user2.name
-    click_on "Choose File"
-#    fill_in "Description", with: @user2.description
-#    fill_in "Email", with: @user2.email
+#    img = URI.open(Faker::Avatar.image)
+#    user.photo.attach(io: img, filename: img)
+
+    user = User.new(
+      email: Faker::Internet.unique.email,
+      password: "password",
+      name: Faker::Name.unique.first_name,
+      description: Faker::Lorem.paragraph,
+      photo: Faker::Avatar.image
+    )
+
+    fill_in "Name", with: user.name
+    fill_in "Description", with: user.description
+    fill_in "Email", with: user.email
+    fill_in "Password", with: "password"
+    fill_in "Password confirmation", with: "password"
+    attach_file user.photo, URI.open(user.photo)
 
     click_on "Sign up"
 
     assert_text "Signed in successfully."
   end
-=end
 end

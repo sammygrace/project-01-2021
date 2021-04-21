@@ -1,4 +1,4 @@
-<%= form_for(Like.new(user: current_user, post: post), url: user_likes_path(current_user)) do |f| %>
+<%= form_for(Like.new(user: user, post: post), url: user_likes_path(user)) do |f| %>
   <%= f.hidden_field :user_id %>
   <%= f.hidden_field :post_id %>
 

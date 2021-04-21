@@ -11,5 +11,6 @@
     name: <%= "User#{n}" %>
     description: <%= "This is user#{n}" %>
     #    photo: fixture_file_upload('db/files/IMG_7772.JPG', 'IMG_7772.JPG')
+    #photo: <%= URI.open(Faker::Avatar.image) %>
     id: <%= n %>
 <% end %>
