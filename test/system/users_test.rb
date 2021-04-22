@@ -42,26 +42,24 @@ class UsersTest < ApplicationSystemTestCase
     visit new_user_registration_url
     assert_selector "h2", text: "Sign up" 
 
-#    img = URI.open(Faker::Avatar.image)
-#    user.photo.attach(io: img, filename: img)
-
     user = User.new(
       email: Faker::Internet.unique.email,
       password: "password",
       name: Faker::Name.unique.first_name,
-      description: Faker::Lorem.paragraph,
-      photo: Faker::Avatar.image
+      description: Faker::Lorem.paragraph, 
     )
+    path = 'db/files/IMG_7772.JPG'
 
     fill_in "Name", with: user.name
     fill_in "Description", with: user.description
     fill_in "Email", with: user.email
     fill_in "Password", with: "password"
     fill_in "Password confirmation", with: "password"
-    attach_file user.photo, URI.open(user.photo)
+    attach_file "Photo", path
 
     click_on "Sign up"
 
-    assert_text "Signed in successfully."
+    assert_text "Welcome! You have signed up successfully."
+    assert_text "Welcome, #{user.name}"
   end
 end
