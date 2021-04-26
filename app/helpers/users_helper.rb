@@ -23,9 +23,9 @@ module UsersHelper
     end
   end
 
-  def display_message_if_friendless(user)
-    if user.friends.count + user.users.count == 0
-      if user.id == current_user.id
+  def display_message_if_friendless(profile, user)
+    if profile.friends.count + profile.users.count == 0
+      if profile.id == user.id
         "You have no friends :("
       else
         "This user has no friends."

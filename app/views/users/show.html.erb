@@ -17,7 +17,7 @@
 </div>
 
 
-<div style="<%= hidden_if_owner_of(@user) %>">
+<div style="<%= hidden_if_owner_of_profile(current_user, @user) %>">
   <%= render partial_for_friendship(@friendship), user: @user, friendship: @friendship %>
 
   <hr>
@@ -33,7 +33,7 @@
 
 <h3>Recent Friends' Posts</h3>
 <p>
-  <%= display_message_if_friendless(@user) %>
+  <%= display_message_if_friendless(@user, current_user) %>
 </p>
 
 <% @friend_posts[0..2].each do |post| %>

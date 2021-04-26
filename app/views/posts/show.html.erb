@@ -11,7 +11,7 @@
   <%= @post.content %>
 </p>
 
-<div style="<%= hidden_if_owner_of(@user) %>">
+<div style="<%= hidden_if_owner_of_post(current_user, @post) %>">
   <%= link_to "More Posts By #{@user.name}", user_posts_path(@user) %> 
 </div>
 

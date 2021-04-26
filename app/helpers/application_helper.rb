@@ -1,8 +1,8 @@
 module ApplicationHelper
   include Pagy::Frontend
 
-  def hidden_when_not_signed_in
-    if !user_signed_in?
+  def hidden_if_no_user(user)
+    if user == nil
       "display: none"
     end
   end
@@ -13,8 +13,14 @@ module ApplicationHelper
     end
   end
 
-  def hidden_if_owner_of(user)
-    if user.id == current_user.id
+  def hidden_if_owner_of_profile(user, profile)
+    if user.id == profile.id
+      "display: none"
+    end
+  end
+
+  def hidden_if_owner_of_post(user, post)
+    if post.user_id == user.id
       "display: none"
     end
   end
