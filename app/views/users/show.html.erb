@@ -37,6 +37,6 @@
 </p>
 
 <% @friend_posts[0..2].each do |post| %>
-  <h4><%= link_to post.title, user_post_path(post.user, post) %></h4>
+  <h4><%= link_to post.title, user_post_path(post.user, post), id: "friend-post" %></h4>
   <p class="text-preview"><%= post.content %></p>
 <% end %>

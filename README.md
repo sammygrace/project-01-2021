@@ -3,6 +3,7 @@
 ## To Do:
 
 * friendship confirmation from both friends
+* ability to destroy friendship 
 
 ## Questions
 * how do you test helpers?

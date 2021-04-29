@@ -29,7 +29,9 @@
 
         <td><%= time_ago_in_words(post.created_at) %> ago</td>
 
-        <td><%= link_to post.user.name, user_path(post.user) %></td>
+        <td>
+          <%= link_to post.user.name, user_path(post.user) %>
+        </td>
 
         <td style="<%= hidden_if_unauthorized_to_manage(post) %>">
           <%= link_to fa_icon("trash"), post, method: :delete, data: { confirm: 'are you sure?' } %> 
