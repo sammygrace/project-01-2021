@@ -7,10 +7,8 @@ class MessageFlowTest < ActionDispatch::IntegrationTest
     @user = @conversation.author
     @friend = @conversation.friend
 
-    img = "IMG_7772.JPG"
-    path = "db/files/IMG_7772.JPG"
-    @user.photo.attach(io: File.open(path), filename: img)
-    @friend.photo.attach(io: File.open(path), filename: img)
+    attach_photo(@user)
+    attach_photo(@friend)
   end
 
   test "should redirect to conversation after creating" do

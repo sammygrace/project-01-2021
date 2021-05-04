@@ -11,4 +11,12 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     super
     remove_uploaded_files
   end
+
+=begin
+  def attach_photo(user)
+    img = "IMG_7772.JPG"
+    path = "db/files/IMG_7772.JPG"
+    user.photo.attach(io: File.open(path), filename: img)
+  end
+=end
 end

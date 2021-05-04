@@ -1,0 +1,9 @@
+one:
+  id: 1
+  key: '8ym9gejl5ipp0dbevzx9cfe1eso1'
+  filename: "#<File:0x00007fd50d8343e0>"
+  content_type: 'image/png'
+  metadata: '{"identified":true, "analyzed":true}'
+  byte_size: 38261
+  checksum: "obmcUsMjq8Igoo0AVAr2sw=="
+  created_at: "2021-02-03 18:48:11"

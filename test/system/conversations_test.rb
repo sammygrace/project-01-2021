@@ -1,19 +1,13 @@
 require "application_system_test_case"
 
 class ConversationsTest < ApplicationSystemTestCase
-  include Devise::Test::IntegrationHelpers
-
   setup do
     @conversation = conversations(:one)
     @author = users(:user_2)
     @friend = users(:user_3)
 
     sign_in @author
-  end
 
-  test "visiting the index" do
-    visit conversations_url
-    assert_selector "h1", text: "Conversations"
   end
 
   test "creating a Conversation" do
@@ -35,5 +29,13 @@ class ConversationsTest < ApplicationSystemTestCase
     end
 
     assert_text "Conversation was successfully destroyed"
+  end
+
+  test "visiting a conversation" do
+    visit friendship_conversation_url(@conversation.friendship, @conversation)
+
+    assert_selector "h4", text: "Author: #{@conversation.author.name}"
+    assert_selector "h4", text: "Friend: #{@conversation.friend.name}"
+    assert_button "Create Message"
   end
 end

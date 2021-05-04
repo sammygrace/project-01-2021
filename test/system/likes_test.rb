@@ -1,8 +1,6 @@
 require "application_system_test_case"
 
 class LikesTest < ApplicationSystemTestCase
-  include Devise::Test::IntegrationHelpers
-
   setup do
     @like = likes(:one)
     @post = posts(:one)

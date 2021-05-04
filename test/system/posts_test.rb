@@ -1,8 +1,6 @@
 require "application_system_test_case"
 
 class PostsTest < ApplicationSystemTestCase
-  include Devise::Test::IntegrationHelpers
-
   setup do
     @post = posts(:one)
     @user = users(:user_1)

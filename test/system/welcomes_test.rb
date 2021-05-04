@@ -7,7 +7,7 @@ class WelcomesTest < ApplicationSystemTestCase
     @user = users(:user_1)
   end
 
- test "visiting the index before signing in" do
+ test "visiting the home page before signing in" do
    visit root_url
 
    assert_selector "h1", text: "Home Page"
@@ -17,7 +17,7 @@ class WelcomesTest < ApplicationSystemTestCase
    assert_no_link "All Posts"
  end
 
- test "visiting the index after signing in" do
+ test "visiting the home page after signing in" do
    sign_in @user
    visit root_url
 

@@ -1,8 +1,6 @@
 require "application_system_test_case"
 
 class UsersTest < ApplicationSystemTestCase
-  include Devise::Test::IntegrationHelpers
-
   setup do
     @user1 = users(:user_1)
     @user2 = users(:user_2)

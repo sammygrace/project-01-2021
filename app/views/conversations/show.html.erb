@@ -1,16 +1,18 @@
-<p>
+<h4>
   <strong>Author:</strong>
   <%= link_to @author.name, user_path(@author) %>
-</p>
+</h4>
 
-<p>
+<h4>
   <strong>Friend:</strong>
   <%= link_to @friend.name, user_path(@friend) %>
-</p>
+</h4>
+
+<hr>
 
 <% @messages.each do |message| %>
   <p>
-    <%= image_tag message.user.photo, width: "35px" %>
+    <strong><%= message.user.name %></strong>
     <%= message.content %>
     <div style="text-align:right"> 
       <%= time_ago_in_words(message.created_at) %> ago
