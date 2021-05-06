@@ -17,7 +17,8 @@ class ConversationFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     assert_select "p.notice", "Conversation was successfully created."
-    assert_select "p" do
+
+    assert_select "h4" do
       assert_select "strong", "Author:"
       assert_select "a", @user.name
       assert_select "strong", "Friend:"

@@ -14,16 +14,8 @@ class UserTest < ActiveSupport::TestCase
       user.name = @user.name
       user.description = Faker::Lorem.paragraph
       user.password = "password"
-      user.photo.attach(io: File.open('db/files/IMG_7772.JPG'), filename: 'IMG_7772.JPG')
+      attach_photo(user)
 
     assert_not user.save
   end
-
-=begin
-  test "should have attached photo" do
-    User.all.each do |user|
-      assert user.photo.attached?
-    end
-  end
-=end
 end

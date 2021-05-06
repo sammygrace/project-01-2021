@@ -3,8 +3,6 @@ require_relative '../config/environment'
 require 'rails/test_help'
 
 class ActiveSupport::TestCase
-  include Devise::Test::IntegrationHelpers
-
   # Run tests in parallel with specified workers
   parallelize(workers: :number_of_processors)
 
@@ -14,6 +12,7 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  include Devise::Test::IntegrationHelpers
 
   def attach_photo(user)
     img = "IMG_7772.JPG"

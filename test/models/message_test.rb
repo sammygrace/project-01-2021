@@ -16,4 +16,14 @@ class MessageTest < ActiveSupport::TestCase
       assert_not_nil message.conversation
     end
   end
+
+  test "should not create message for other users' conversations" do
+    @uninvited_user = users(:user_5)
+    conversation = Conversation.where.not("friend_id = ? and user_id = ?", @uninvited_user.id, @uninvited_user.id).first
+    message = @uninvited_user.messages.new(conversation: conversation, content: "hi")
+    sign_in @uninvited_user
+
+    ability = Ability.new(@univited_user)
+    assert_not ability.can?(:create, conversation.messages.new(content: message.content))
+  end
 end

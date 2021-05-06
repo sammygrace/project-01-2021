@@ -11,4 +11,5 @@
     name: <%= "User#{n}" %>
     description: <%= "This is user#{n}" %>
     id: <%= n %>
+    encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
 <% end %>

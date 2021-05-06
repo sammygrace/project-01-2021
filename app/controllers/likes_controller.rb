@@ -22,10 +22,10 @@ class LikesController < ApplicationController
 
     respond_to do |format|
       if @like.save
-        format.html { redirect_to @like.post }
+        format.html { redirect_to user_post_url(@like.post.user, @like.post) }
         format.json { render :show, status: :created, location: @like }
       else
-        format.html { redirect_to @like.post, alert: 'Already liked this post.' }
+        format.html { redirect_to user_post_path(@like.post.user, @like.post), alert: 'Already liked this post.' }
         format.json { render json: @like.errors, status: :unprocessable_entity }
       end
     end
@@ -36,7 +36,7 @@ class LikesController < ApplicationController
   def destroy
     @like.destroy
     respond_to do |format|
-      format.html { redirect_to post_path(@like.post), notice: 'Unliked this post.' }
+      format.html { redirect_to user_post_path(@like.post.user, @like.post), notice: 'Unliked this post.' }
       format.json { head :no_content }
     end
   end

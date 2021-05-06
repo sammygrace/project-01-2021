@@ -9,6 +9,8 @@ class MessageFlowTest < ActionDispatch::IntegrationTest
 
     attach_photo(@user)
     attach_photo(@friend)
+
+    sign_in @user
   end
 
   test "should redirect to conversation after creating" do
@@ -19,14 +21,17 @@ class MessageFlowTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_response :success
 
-    assert_select "p" do
+    assert_select "h4" do
       assert_select "strong", "Author:"
       assert_select "a", @user.name
-      assert_select "strong", "Friend:"
-      assert_select "a", @friend.name
     end
 
-    assert_select "p", "Message sent!"
-    assert_select "p", @message.content
+    assert_select "h4" do
+      assert_select "strong", "Author:"
+      assert_select "a", @user.name
+    end
+
+    assert_select "p#notice", "Message sent!"
+    assert_select "div#message-content", @message.content
   end
 end

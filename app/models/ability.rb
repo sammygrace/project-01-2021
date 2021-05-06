@@ -17,6 +17,7 @@ class Ability
       cannot :create, Like, post: { user_id: user.id }
     else
       cannot :create, Like
+      cannot :create, Friendship
     end
   end
 end

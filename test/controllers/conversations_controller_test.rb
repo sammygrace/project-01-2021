@@ -3,8 +3,8 @@ require 'test_helper'
 class ConversationsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @conversation = conversations(:one)
-    users(:user_1).photo.attach(io: File.open('db/files/IMG_7772.JPG'), filename: 'IMG_7772.JPG')
-    users(:user_2).photo.attach(io: File.open('db/files/IMG_7772.JPG'), filename: 'IMG_7772.JPG')
+    attach_photo users(:user_1)
+    attach_photo users(:user_2)
   end
 
   test "should get index" do
