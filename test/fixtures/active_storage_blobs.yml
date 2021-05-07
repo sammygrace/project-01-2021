@@ -7,3 +7,4 @@ one:
   byte_size: 38261
   checksum: "obmcUsMjq8Igoo0AVAr2sw=="
   created_at: "2021-02-03 18:48:11"
+  service_name: local
