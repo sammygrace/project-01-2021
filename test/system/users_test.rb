@@ -16,26 +16,40 @@ class UsersTest < ApplicationSystemTestCase
     assert_no_selector "h3", text: "Recent Posts"
     assert_selector "h3", text: "Recent Friends' Posts"
 
-    assert_link "New Post"
-    assert_link "Edit Profile"
-    assert_link "My Posts"
-    assert_link "Liked Posts"
+    within find("div") do
+      assert_link "New Post"
+      assert_link "Edit Profile"
+      assert_link "My Posts"
+      assert_link "Liked Posts"
+    end
 
     click_link "New Post"
     assert_text "New Post"
-    click_link "Profile"
+
+    within find("nav") do
+      click_link "Profile"
+    end
 
     click_link "Edit Profile"
     assert_text "Edit User"
-    click_link "Profile"
+
+    within find("nav") do
+      click_link "Profile"
+    end
     
     click_link "My Posts"
     assert_text "Posts"
-    click_link "Profile"
+
+    within find("nav") do
+      click_link "Profile"
+    end
 
     click_link "Liked Posts"
     assert_text "Liked Posts"
-    click_link "Profile"
+
+    within find("nav") do
+      click_link "Profile"
+    end
   end
 
   test "visiting another user's profile" do
@@ -60,7 +74,7 @@ class UsersTest < ApplicationSystemTestCase
     click_link "Sign Up"
 
     @new_user = User.new(
-      email: Faker::Internet.email,
+      email: "newuser@example.com",
       password: "password",
       name: Faker::Name.first_name,
       description: Faker::Lorem.paragraph, 

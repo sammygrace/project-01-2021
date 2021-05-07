@@ -13,10 +13,17 @@ class PostsTest < ApplicationSystemTestCase
     visit posts_url
     assert_selector "h1", text: "Posts"
 
-    click_link "Home"
-    click_link "All Posts"
+    assert_selector "nav a" do
+      click_link "Home"
+    end
 
-    assert_selector "thead tr" do
+    assert_selector "h1", text: "Home Page"
+
+    within find("nav") do
+      click_link "All Posts"
+    end
+
+    within find("thead tr") do
       assert_selector "th", text: "Title"
       assert_selector "th", text: "Likes"
       assert_selector "th", text: "Content"
@@ -30,14 +37,17 @@ class PostsTest < ApplicationSystemTestCase
     assert_selector "h1", text: "New Post"
 
     click_link "Cancel"
+    assert_selector "h1", text: "Posts"
+
     click_on "New Post"
 
-    fill_in "Title", with: @post.title
-    fill_in "Content", with: @post.content
+    post = @user.posts.new(title: "My Post", content: "this is my post")
+    fill_in "Title", with: post.title
+    fill_in "Content", with: post.content
     click_on "Create Post"
 
     assert_text "Post was successfully created"
-    assert_selector "h1", text: @post.title
+    assert_selector "h1", text: post.title
     click_on "my posts"
   end
 
