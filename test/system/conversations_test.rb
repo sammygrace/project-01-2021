@@ -6,8 +6,7 @@ class ConversationsTest < ApplicationSystemTestCase
     @author = users(:user_2)
     @friend = users(:user_3)
 
-    sign_in @author
-
+    log_in @author
   end
 
   test "creating a Conversation" do

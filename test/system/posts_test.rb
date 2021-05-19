@@ -6,14 +6,14 @@ class PostsTest < ApplicationSystemTestCase
     @post2 = posts(:two)
     @user = users(:user_1)
 
-    sign_in @user
+    log_in @user
   end
 
   test "visiting the index" do
     visit posts_url
     assert_selector "h1", text: "Posts"
 
-    assert_selector "nav a" do
+    within find("nav") do
       click_link "Home"
     end
 
@@ -41,7 +41,7 @@ class PostsTest < ApplicationSystemTestCase
 
     click_on "New Post"
 
-    post = @user.posts.new(title: "My Post", content: "this is my post")
+    post = Post.new(title: "My Post", user_id: @user.id, content: "this is my post")
     fill_in "Title", with: post.title
     fill_in "Content", with: post.content
     click_on "Create Post"
@@ -55,7 +55,7 @@ class PostsTest < ApplicationSystemTestCase
     post = @user.posts.sample
     assert_not_nil post
 
-    visit edit_user_post_path(@user, post)
+    visit edit_user_post_url(@user, post)
     assert_selector "h1", text: "Editing Post"
     click_link "Cancel"
 
@@ -91,7 +91,7 @@ class PostsTest < ApplicationSystemTestCase
     assert_selector "h1", text: user.name
     click_on "More Posts by #{user.name} =>"
 
-    posts.each do |post|
+    posts[0..9].each do |post|
       assert_link post.title
     end
   end

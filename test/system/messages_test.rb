@@ -12,7 +12,7 @@ class MessagesTest < ApplicationSystemTestCase
     @author.photo.attach(io: File.open('db/files/IMG_7772.JPG'), filename: 'IMG_7772.JPG')
     @friend.photo.attach(io: File.open('db/files/IMG_7772.JPG'), filename: 'IMG_7772.JPG')
 
-    sign_in @author
+    log_in @author
   end
 
   test "visiting the index" do

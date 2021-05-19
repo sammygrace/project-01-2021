@@ -38,7 +38,7 @@ class PostsController < ApplicationController
         format.html { redirect_to user_post_path(@post.user, @post), notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
-        format.html { redirect_to posts_path, notice: "Sorry, post could not be created." }
+        format.html { redirect_to new_user_post_path(@post.user), notice: "Sorry, post could not be created." }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end

@@ -8,7 +8,7 @@ class FriendshipsTest < ApplicationSystemTestCase
     @user = users(:user_1)
     @friend= users(:user_3)
 
-    sign_in @user
+    log_in @user
   end
 
   test "visiting the index" do

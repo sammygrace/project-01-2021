@@ -18,7 +18,7 @@ class WelcomesTest < ApplicationSystemTestCase
  end
 
  test "visiting the home page after signing in" do
-   sign_in @user
+   log_in @user
    visit root_url
 
    assert_selector "h1", text: "Home Page"

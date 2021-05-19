@@ -12,11 +12,26 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     remove_uploaded_files
   end
 
-=begin
-  def attach_photo(user)
-    img = "IMG_7772.JPG"
-    path = "db/files/IMG_7772.JPG"
-    user.photo.attach(io: File.open(path), filename: img)
+  def navigate_link(link, heading_text)
+    click_link(link)
+    assert_text(heading_text)
   end
-=end
+
+  def back_to_profile
+    within find("nav") do
+      click_link "Profile"
+    end
+  end
+
+  def log_in(user)
+    visit root_url
+    click_on "Sign In"
+
+    assert_text "Log in"
+    fill_in "Email", with: user.email
+    fill_in "Password", with: 'password'
+
+    click_on "Log in"
+    assert_text "Signed in successfully."
+  end
 end

@@ -19,7 +19,8 @@ class User < ApplicationRecord
 
   has_one_attached :photo
 
-  validates_uniqueness_of :name, presence: true
+  validates :name, uniqueness: { message: "already taken" }
+  validates :name, presence: true, allow_blank: false
 
   validates :photo, presence: true
 end

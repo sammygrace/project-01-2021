@@ -18,4 +18,14 @@ class UserTest < ActiveSupport::TestCase
 
     assert_not user.save
   end
+
+  test "should not save if name is blank" do
+    user = User.new
+      user.email = Faker::Internet.unique.email
+      user.name = ""
+      user.description = Faker::Lorem.paragraph
+      user.password = "password"
+      attach_photo(user)
+    assert_not user.save
+  end
 end

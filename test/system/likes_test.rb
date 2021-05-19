@@ -6,7 +6,7 @@ class LikesTest < ApplicationSystemTestCase
     @post = posts(:one)
     @user = users(:user_3)
 
-    sign_in @user
+    log_in @user
   end
 
   test "creating a Like" do

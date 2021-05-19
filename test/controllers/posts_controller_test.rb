@@ -66,4 +66,9 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to user_posts_url(@post.user)
   end
+
+  test "should redirect if failed to create" do
+    post user_posts_url(@user), params: { post: { content: @post.content, title: "", user_id: @post.user_id } }
+    assert_redirected_to new_user_post_path(@user)
+  end
 end
