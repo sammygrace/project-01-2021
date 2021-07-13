@@ -13,11 +13,14 @@
 <% @messages.each do |message| %>
   <p>
     <strong><%= message.user.name %></strong>
-    <div id="message-content"><%= message.content %></div>
+    <div><%= message.content %></div>
     <div style="text-align:right"> 
       <%= time_ago_in_words(message.created_at) %> ago
     </div>
   </p>
 <% end %>
+
+<p id="msg">
+</p>
 
 <%= render "messages/form", message: @conversation.messages.new(user: current_user) %>
