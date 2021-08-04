@@ -32,7 +32,7 @@ class ConversationsController < ApplicationController
 
     respond_to do |format|
       if @conversation.save
-        format.html { redirect_to friendship_conversation_path(@conversation.friendship, @conversation), notice: 'Conversation was successfully created.' }
+        format.html { redirect_to conversation_path(@conversation), notice: 'Conversation was successfully created.' }
         format.json { render :show, status: :created, location: @conversation }
       else
         format.html { render :new }

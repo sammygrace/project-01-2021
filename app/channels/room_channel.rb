@@ -1,7 +1,8 @@
 class RoomChannel < ApplicationCable::Channel
   def subscribed
-    # stream_from "some_channel"
-    stream_from "room_channel"
+#    if params[:room] == params[:conversation_id]
+      stream_from "room_#{params[:room]}"
+#    end
   end
 
   def unsubscribed

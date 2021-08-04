@@ -12,7 +12,7 @@ module UsersHelper
   end
 
   def link_to_conversation(friendship)
-    friendship_conversation_path(friendship, friendship.conversation) if friendship.conversation
+    conversation_path(friendship.conversation) if friendship.conversation
   end
 
   def partial_for_friendship(friendship)

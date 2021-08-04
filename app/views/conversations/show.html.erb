@@ -1,6 +1,12 @@
+<h1 id="<%= @conversation.id %>">
+  <%= @conversation.id %>
+</h1>
+
 <h4>
-  <strong>Author:</strong>
-  <%= link_to @author.name, user_path(@author) %>
+  <strong>
+    Author:
+  </strong>
+  <%= link_to @author.name, user_path(@author), id: @author.id %>
 </h4>
 
 <h4>
@@ -20,7 +26,7 @@
   </p>
 <% end %>
 
-<p id="msg">
+<p id="new-msg">
 </p>
 
 <%= render "messages/form", message: @conversation.messages.new(user: current_user) %>
