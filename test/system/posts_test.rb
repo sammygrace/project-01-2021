@@ -30,6 +30,8 @@ class PostsTest < ApplicationSystemTestCase
       assert_selector "th", text: "Posted"
       assert_selector "th", text: "Author"
     end
+
+    assert_link "New Post"
   end
 
   test "creating a Post" do

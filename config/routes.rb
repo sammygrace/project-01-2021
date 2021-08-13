@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   end
 
   post "/messages" => "messages#create", as: "create_message"
+  post "/posts" => "posts#create", as: "create_post"
 
   root to: 'welcome#index'
 end

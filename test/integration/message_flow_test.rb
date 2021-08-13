@@ -32,6 +32,6 @@ class MessageFlowTest < ActionDispatch::IntegrationTest
     end
 
     assert_select "p#notice", "Message sent!"
-    assert_select "div#message-content", @message.content
+    assert_select "div#msg-content", @message.content
   end
 end

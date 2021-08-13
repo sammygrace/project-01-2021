@@ -9,6 +9,7 @@ class PostsController < ApplicationController
     @user = User.find_by(id: params[:user_id])
     @likes = current_user.likes
     @posts = @user.present? ? @user.posts : Post.all
+    @post = current_user.posts.new
     @pagy, @posts = pagy(@posts.order(:created_at).reverse_order, items: 10)
   end
 
@@ -35,10 +36,21 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to user_post_path(@post.user, @post), notice: 'Post was successfully created.' }
+        format.html { redirect_to posts_path, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
+
+          ActionCable.server.broadcast("post_channel", {
+            title: @post.title,
+            content: @post.content,
+            id: @post.id,
+            user_name: User.find_by(id: @post.user_id).name,
+            user_id: @post.user_id,
+            likes: @post.likes.count,
+            created_at: @post.created_at
+          })
+
       else
-        format.html { redirect_to new_user_post_path(@post.user), notice: "Sorry, post could not be created." }
+        format.html { redirect_to posts_path, notice: "Sorry, post could not be created." }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end

@@ -19,7 +19,7 @@
 <% @messages.each do |message| %>
   <p>
     <strong><%= message.user.name %></strong>
-    <div><%= message.content %></div>
+    <div id="msg-content"><%= message.content %></div>
     <div style="text-align:right"> 
       <%= time_ago_in_words(message.created_at) %> ago
     </div>

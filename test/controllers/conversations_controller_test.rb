@@ -23,7 +23,7 @@ class ConversationsControllerTest < ActionDispatch::IntegrationTest
         params: { conversation: { user_id: @conversation.user_id, friend_id: @conversation.friend_id, friendship_id: @conversation.friendship_id } }
     end
 
-    assert_redirected_to friendship_conversation_url(Conversation.last.friendship, Conversation.last)
+    assert_redirected_to conversation_url(Conversation.last)
   end
 
   test "should show conversation" do

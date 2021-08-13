@@ -30,7 +30,8 @@ class UsersHelperTest < ActionView::TestCase
   end
 
   test "chat button goes to correct conversation" do
-    assert_equal "/friendships/#{@friendship.id}/conversations/#{@friendship.conversation.id}", link_to_conversation(@friendship)
+    @conversation = @friendship.conversation
+    assert_equal "/conversations/#{@conversation.id}", conversation_path(@conversation)
   end
 end
 

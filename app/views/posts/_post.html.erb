@@ -1,0 +1,20 @@
+<td><%= link_to post.title, user_post_path(post.user, post) %></td>
+
+<td>
+  <i class="fa fa-heart" style="<%= hidden_if_unliked(post, @likes) %>"></i>
+  <%= post.likes.count %>
+</td>
+
+<td class="text-preview">
+  <%= post.content %>
+</td>
+
+<td><%= time_ago_in_words(post.created_at) %> ago</td>
+
+<td>
+  <%= link_to post.user.name, user_path(post.user) %>
+</td>
+
+<td style="<%= hidden_if_unauthorized_to_manage(post) %>">
+  <%= link_to fa_icon("trash"), post, method: :delete, data: { confirm: 'are you sure?' } %> 
+</td>
