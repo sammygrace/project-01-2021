@@ -34,6 +34,19 @@ class PostsTest < ApplicationSystemTestCase
     assert_link "New Post"
   end
 
+  test "visiting my posts" do
+    visit "/my-posts"
+    assert_selector "h1", text: "My Posts"
+
+    within find("thead tr") do
+      assert_selector "th", text: "Title"
+      assert_selector "th", text: "Likes"
+      assert_selector "th", text: "Content"
+      assert_selector "th", text: "Posted"
+      assert_selector "th", text: "Author"
+    end
+  end
+
   test "creating a Post" do
     visit new_user_post_url(@user)
     assert_selector "h1", text: "New Post"
@@ -49,8 +62,7 @@ class PostsTest < ApplicationSystemTestCase
     click_on "Create Post"
 
     assert_text "Post was successfully created"
-    assert_selector "h1", text: post.title
-    click_on "my posts"
+    assert_selector "h1", text: "Posts" 
   end
 
   test "updating a Post" do
@@ -119,5 +131,15 @@ class PostsTest < ApplicationSystemTestCase
 
     click_link @post2.user.name
     assert_selector "h1", text: @post2.user.name
+  end
+
+  test "my posts links" do
+    visit user_post_url(@post.user, @post)
+    click_on "My Posts"
+    assert_selector "h1", text: "My Posts"
+
+    visit user_url(@post.user)
+    click_on "My Posts"
+    assert_selector "h1", text: "My Posts"
   end
 end

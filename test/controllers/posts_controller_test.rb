@@ -12,6 +12,11 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should get my posts" do
+    get "/my-posts"
+    assert_response :success
+  end
+
   test "should not get index if not signed in" do
     sign_out(@user)
     get posts_url
@@ -25,10 +30,10 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create post" do
     assert_difference('Post.count') do
-      post user_posts_url(@user), params: { post: { content: @post.content, title: @post.title, user_id: @post.user_id } }
+      post posts_url, params: { post: { content: @post.content, title: @post.title, user_id: @post.user_id } }
     end
 
-    assert_redirected_to user_post_url(@user, Post.last)
+    assert_redirected_to posts_url
   end
 
   test "should show post" do
@@ -64,11 +69,11 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
       delete user_post_url(@post.user, @post)
     end
 
-    assert_redirected_to user_posts_url(@post.user)
+    assert_redirected_to "/my-posts"
   end
 
   test "should redirect if failed to create" do
     post user_posts_url(@user), params: { post: { content: @post.content, title: "", user_id: @post.user_id } }
-    assert_redirected_to new_user_post_path(@user)
+    assert_redirected_to posts_path
   end
 end

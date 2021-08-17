@@ -9,10 +9,10 @@ class PostFlowTest < ActionDispatch::IntegrationTest
     sign_in @user
   end
 
-  test "user posts path should show correct posts" do
-    get user_posts_url(@user)
+  test "my posts path should show correct posts" do
+    get "/my-posts"
 
-    assert_select "h1", "Posts"
+    assert_select "h1", "My Posts"
 
     assert_select "tbody tr" do |posts|
       posts.each do |post|
@@ -21,7 +21,7 @@ class PostFlowTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "should redirect to show after creating" do
+  test "should redirect to index after creating" do
     new_post = @user.posts.new(title: Faker::Lorem.sentence, content: Faker::Lorem.paragraph)
 
     get new_user_post_url(@user)
@@ -32,11 +32,12 @@ class PostFlowTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_response :success
 
-    assert_select "h1", new_post.title
-    assert_select "a", @user.name
+    assert_select "h1", "Posts"
+    assert_select "tbody tr td a", new_post.title
+    assert_select "tbody tr td a", @user.name
   end
 
-  test "should redirect to user posts after destroying" do
+  test "should redirect to my posts after destroying" do
     get new_user_post_url(@user)
     delete user_post_url(@user, @post)
 
@@ -44,8 +45,7 @@ class PostFlowTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_response :success
 
-    assert_select "h1", "Posts" 
-    assert body =~ /#{@user.id}/
+    assert_select "h1", "My Posts" 
   end
 
   test "should redirect to show after updating" do
